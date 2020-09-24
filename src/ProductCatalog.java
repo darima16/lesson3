@@ -12,6 +12,7 @@ public class ProductCatalog {
     }
 
     public void createProduct(Product product) throws ProductAlreadyExists {
+
             for (Product i: listProduct) {
                 if (i.name.equals(product.name)) {
                     throw new ProductAlreadyExists("Продукт уже существует!");
@@ -40,12 +41,18 @@ public class ProductCatalog {
 
     public void deleteProduct(int id) throws ProductNotFound {
             boolean bool = false;
-            for (Product i: listProduct) {
-                if (i.id == id ) {
+            for (int i = 0; i<listProduct.size(); i++) {
+                if (listProduct.get(i).id == id) {
                     bool = true;
                     listProduct.remove(i);
                 }
             }
+//            for (Product i: listProduct) {
+//                if (i.id == id ) {
+//                    bool = true;
+//                    listProduct.remove(i);
+//                }
+//            }
             if (!bool) {
                 throw new ProductNotFound("Продукт не существует");
             }

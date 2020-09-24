@@ -22,25 +22,14 @@ public class Main {
             productAlreadyExists.printStackTrace();
         }
         lst.printInfo();
+        System.out.println("");
 
         try {
-            lst.deleteProduct(555555);
-            lst.printInfo();
+            lst.deleteProduct(10);
             lst.updateProduct(f);
         } catch (ProductNotValid productNotValid) {
             productNotValid.printStackTrace();
         }
         lst.printInfo();
-
-
-
-
     }
-
-
-
-
-
-
-
 }
