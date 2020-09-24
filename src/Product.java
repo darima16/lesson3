@@ -16,14 +16,19 @@ public class Product {
         return name;
     }
 
+    public void printInfo() {
+        System.out.println("ID: "+id+" Name: "+name+
+                " Supplier: "+supplier+" Price: "+price);
+    }
+
 }
 
 class ProductAlreadyExists extends Exception {
-
     public ProductAlreadyExists(String message) {
         super(message);
     }
 }
+
 class ProductNotValid extends Exception {
     public  ProductNotValid() {
     }
@@ -34,8 +39,6 @@ class ProductNotValid extends Exception {
 
 
 class ProductNotFound extends RuntimeException {
-    public ProductNotFound() {
-    }
 
     public ProductNotFound(String message) {
         super(message);

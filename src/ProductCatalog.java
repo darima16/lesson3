@@ -12,44 +12,49 @@ public class ProductCatalog {
     }
 
     public void createProduct(Product product) throws ProductAlreadyExists {
-
             for (Product i: listProduct) {
                 if (i.name.equals(product.name)) {
                     throw new ProductAlreadyExists("Продукт уже существует!");
                 }
             }
             listProduct.add(product);
-
         }
 
 
-    public void updateProduct(Product product) throws ProductNotFound{
-        try {
-            for (Product i: listProduct) {
-                if (i.getName() == null) {
-                    throw new ProductNotValid();
-                }
-                if (i.id == product.id) {
-                    listProduct.add(product);
-                } else {
-                    throw new ProductNotFound();
-                }
+    public void updateProduct(Product product) throws ProductNotFound, ProductNotValid{
+        if (product.getName().equals("")) {
+            throw new ProductNotValid("Нет наименования продукта!");
+        }
+        boolean bool = false;
+        for (Product i: listProduct) {
+            if (i.id == product.id) {
+                bool = true;
+                listProduct.remove(i);
+                listProduct.add(product);
             }
-        } catch (ProductNotValid e) {
-            System.out.println(e.getMessage());
         }
-
+        if (!bool) {
+            throw new ProductNotFound("Продукт не найден");
+        }
     }
 
     public void deleteProduct(int id) throws ProductNotFound {
-        
-            for (int i = 0; i < listProduct.size(); i++) {
-                if (listProduct.get(i).id == id) {
-                    listProduct.remove(listProduct.get(i));
-                }
-                else {
-                    throw new ProductNotFound();
+            boolean bool = false;
+            for (Product i: listProduct) {
+                if (i.id == id ) {
+                    bool = true;
+                    listProduct.remove(i);
                 }
             }
+            if (!bool) {
+                throw new ProductNotFound("Продукт не существует");
+            }
         }
+    public void printInfo() {
+        for (Product x : listProduct) {
+                x.printInfo();
+            }
+        }
+
+
 }
