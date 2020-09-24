@@ -30,8 +30,7 @@ class ProductAlreadyExists extends Exception {
 }
 
 class ProductNotValid extends Exception {
-    public  ProductNotValid() {
-    }
+
     public ProductNotValid(String message) {
         super(message);
     }
