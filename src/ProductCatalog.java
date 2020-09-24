@@ -5,30 +5,51 @@ public class ProductCatalog {
 
     public ArrayList<Product> getAllProducts() {
         return listProduct;
-
     }
 
-    public void createProduct(Product product) {
-        try{
-            for (int i=0; i<listProduct.size();i++) {
-                if (listProduct.get(i).name == product.name) {
-                    throw new ProductAlreadyExists();
+    public void addProduct(Product product) {
+        listProduct.add(product);
+    }
+
+    public void createProduct(Product product) throws ProductAlreadyExists {
+
+            for (Product i: listProduct) {
+                if (i.name.equals(product.name)) {
+                    throw new ProductAlreadyExists("Продукт уже существует!");
                 }
             }
+            listProduct.add(product);
 
         }
-        catch (ProductAlreadyExists e) {
-            listProduct.add(product);
+
+
+    public void updateProduct(Product product) throws ProductNotFound{
+        try {
+            for (Product i: listProduct) {
+                if (i.getName() == null) {
+                    throw new ProductNotValid();
+                }
+                if (i.id == product.id) {
+                    listProduct.add(product);
+                } else {
+                    throw new ProductNotFound();
+                }
+            }
+        } catch (ProductNotValid e) {
+            System.out.println(e.getMessage());
         }
+
     }
-    public void updateProduct(Product product) {
-        for (int i = 0; i < listProduct.size(); i++) {
-            if (listProduct.get(i).id == product.id) {
+
+    public void deleteProduct(int id) throws ProductNotFound {
+        
+            for (int i = 0; i < listProduct.size(); i++) {
+                if (listProduct.get(i).id == id) {
+                    listProduct.remove(listProduct.get(i));
+                }
+                else {
+                    throw new ProductNotFound();
+                }
             }
         }
-    }
-
-    public void deleteProduct(int id) {
-
-    }
 }
